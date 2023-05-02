@@ -11,4 +11,13 @@ export class UserService {
     const user = this.repo.create({ email, fullName, password });
     this.repo.save(user);
   }
+
+  find(email: string, password: string) {
+    return this.repo.find({
+      where: {
+        email,
+        password,
+      },
+    });
+  }
 }
