@@ -7,6 +7,6 @@ export class CreateBookDto {
   @IsString()
   category: string;
 
-  @IsNumber()
-  code: number;
+  @IsString()
+  code: string;
 }
