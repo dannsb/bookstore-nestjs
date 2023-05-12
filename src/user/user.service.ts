@@ -13,7 +13,7 @@ export class UserService {
   }
 
   find(email: string, password: string) {
-    return this.repo.find({
+    return this.repo.findOne({
       where: {
         email,
         password,

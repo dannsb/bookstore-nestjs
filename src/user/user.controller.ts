@@ -15,7 +15,7 @@ export class UserController {
   @Post('/auth')
   async userAuth(@Body() body: UserAuthDto) {
     const user = await this.userService.find(body.email, body.password);
-    if (!user[0]) {
+    if (!user) {
       return { message: 'username or password is wrong' };
     }
     return { message: 'you successfully logged in :)' };
