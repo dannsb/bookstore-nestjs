@@ -9,7 +9,7 @@ export class UserService {
 
   create(email: string, fullName: string, password: string) {
     const user = this.repo.create({ email, fullName, password });
-    this.repo.save(user);
+    return this.repo.save(user);
   }
 
   find(email: string, password: string) {
