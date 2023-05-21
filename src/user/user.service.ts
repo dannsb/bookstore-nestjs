@@ -12,12 +12,7 @@ export class UserService {
     return this.repo.save(user);
   }
 
-  find(email: string, password: string) {
-    return this.repo.findOne({
-      where: {
-        email,
-        password,
-      },
-    });
+  find(email: string) {
+    return this.repo.find({ where: { email } });
   }
 }
