@@ -16,9 +16,9 @@ import { Book } from './book/entities/book.entity';
     BookModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
-      type: 'mysql',
+      type: 'postgres',
       host: 'localhost',
-      port: 3306,
+      port: 5432,
       username: process.env.DBUSERNAME,
       password: process.env.DBPASS,
       database: process.env.DBNAME,
