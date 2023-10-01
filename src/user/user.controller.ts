@@ -1,5 +1,12 @@
 import { Controller } from '@nestjs/common';
-import { Post, Get, Body, UseInterceptors } from '@nestjs/common/decorators';
+import {
+  Post,
+  Get,
+  Body,
+  UseInterceptors,
+  Session,
+  Param,
+} from '@nestjs/common/decorators';
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 
 // services
@@ -20,13 +27,21 @@ export class UserController {
 
   @UseInterceptors(new SerializeInterceptor(UserDto))
   @Post('/signup')
-  createUser(@Body() body: CreateUserDto) {
-    return this.authService.signUp(body.email, body.password, body.fullName);
+  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signUp(
+      body.email,
+      body.password,
+      body.fullName,
+    );
+    session.userId = user.id;
+    return user;
   }
 
   @UseInterceptors(new SerializeInterceptor(UserDto))
   @Post('/signin')
-  signin(@Body() body: UserAuthDto) {
-    return this.authService.signIn(body.email, body.password);
+  async signIn(@Body() body: UserAuthDto, @Session() session: any) {
+    const user = await this.authService.signIn(body.email, body.password);
+    session.userId = user.id;
+    return user; 
   }
 }
